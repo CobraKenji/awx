@@ -30,9 +30,6 @@
     setype: container_file_t
   register: awx_secret_key
 
-- name: Apply new SELinux file context to filesystem
-  command: "restorecon -irv {{ docker_compose_dir }}"
-
 - name: Start the containers
   docker_service:
     project_src: "{{ docker_compose_dir }}"
