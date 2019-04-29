@@ -3,6 +3,12 @@
   file:
     path: "{{ docker_compose_dir }}"
     state: directory
+    
+- name: manage SELinux mischief
+  sefcontext
+    target: "{{ docker_compose_dir }}"
+    setype: container_file_t
+    state: present
 
 - name: Create Docker Compose Configuration
   template:
