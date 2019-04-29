@@ -15,6 +15,7 @@
     src: "{{ item }}.j2"
     dest: "{{ docker_compose_dir }}/{{ item }}"
     mode: 0600
+    setype: container_file_t
   with_items:
     - environment.sh
     - credentials.py
@@ -26,6 +27,7 @@
     content: "{{ secret_key }}"
     dest: "{{ docker_compose_dir }}/SECRET_KEY"
     mode: 0600
+    setype: container_file_t
   register: awx_secret_key
 
 - name: Apply new SELinux file context to filesystem
